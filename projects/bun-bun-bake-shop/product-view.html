@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"   
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="bunbun">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+
+<!-- CSS -->
+<link rel="stylesheet" href="css/productView.css" type="text/css"/>
+<link rel="stylesheet" href="css/styles.css" type="text/css"/>
+
+<!-- Scripts -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script src="js/lib/garand-sticky-73b0fbe/jquery.sticky.js"></script>
+
+<script src="js/animation.js"></script>
+<script src="js/app.js"></script>
+<script src="js/services/cart.js"></script>
+<script src="js/services/items.js"></script>
+<script src="js/controllers/productCtrl.js"></script>
+<script src="js/controllers/menuCtrl.js"></script>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Dancing+Script|Yantramanav:100,300,400,500,700,900" rel="stylesheet"/>
+
+<title>Bun Bun Bake Shop</title>
+
+</head>
+
+<body>
+    <div ng-controller="ProductCtrl as product">
+         <!-- Image Banner-->
+         <div class="image-banner">
+            <img class="back-button" onclick="window.location.href='index.html'" src="assets/noun_back arrow_white_1299431.png"/>
+            <img ng-src="{{product.productObj.imgUrl}}" />
+        </div>
+        <!-- Main page content -->
+        <div id="main-content">
+            <div class="decorative-heading">{{::product.productObj.name}}</div>
+            <div class="social-banner">
+                <img src="assets/facebook.png"/>
+                <img src="assets/google.png"/>
+            </div>
+            {{::product.productObj.desc}}
+            <div class="order-details-area">
+
+                <!--Customize Order Box-->
+                <div class="customize-order-col">
+                    <div class="header">Customize Order</div>
+                    What glaze would you like to have for your {{bun.name}} cinnamon roll?
+                    <br/>
+                    <div style="margin: 0 auto; text-align:center;">
+                        <div class="radio-list-item" ng-repeat="glaze in product.glazeList">
+                            <input type="radio" 
+                                ng-value="$index"
+                                id="{{'glaze-' + $index}}"
+                                ng-model="product.selectedGlazeIndex"/>
+                                <label for="{{'glaze-' + $index}}">&nbsp;{{::glaze.name}}&nbsp;&nbsp;
+                                    <br/>
+                                    <i class="price">+ ${{::glaze.price}}</i>
+                                </label>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add to cart and Quantity selection column-->
+                <div class="add-to-cart-col">
+                    Select the number of rolls you'd like:
+                    <br />
+                    <div style="margin: 0 auto; text-align:center;">
+                        <div class="radio-list-item" ng-repeat="qty in product.qtyList">
+                            <input type="radio"
+                                ng-value="$index"
+                                id="{{'qty-' + $index}}"
+                                ng-model="product.selectedQtyIndex"/>
+                                <label for="{{'qty-' + $index}}">
+                                    &nbsp;{{::qty}}
+                                </label>
+                        </div>
+                    </div>
+                    <div class="price-display">
+                            Total: <span class="price">${{product.selectedPrice.toFixed(2)}}</span>
+                    </div>
+                    <div id="add-to-cart-btn" ng-click="product.addItem($index)">Add to Cart</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div id="footer">
+            &copy; Bun Bun Bake Shop, 2018
+        </div>
+        <ng-include src="'menu.html'"></ng-include>
+    </div>
+</body>
+</html>

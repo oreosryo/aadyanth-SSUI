@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"   
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="bunbun">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+
+<!-- CSS -->
+<link rel="stylesheet" href="css/home.css" type="text/css"/>
+<link rel="stylesheet" href="css/styles.css" type="text/css"/>
+
+<!-- Scripts -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script src="js/lib/garand-sticky-73b0fbe/jquery.sticky.js"></script>
+
+<script src="js/animation.js"></script>
+<script src="js/app.js"></script>
+<script src="js/services/cart.js"></script>
+<script src="js/services/items.js"></script>
+<script src="js/controllers/homeCtrl.js"></script>
+<script src="js/controllers/menuCtrl.js"></script>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Dancing+Script|Yantramanav:100,300,400,500,700,900" rel="stylesheet" />
+
+<title>Bun Bun Bake Shop</title>
+
+</head>
+
+<body>
+    <div ng-controller="HomeCtrl as home">
+        <ng-include src="'menu.html'"></ng-include>
+
+        <!-- Main page content -->
+        <div id="main-content" class="remodal-bg">
+            
+            <!-- Carousel -->
+            <div id="landing-carousel">
+                <img src="assets/bunbuns/baking-1417494_1920.jpg"/>
+            </div>
+            
+            <!-- Landing description -->
+            <div id="landing-description">
+                <div class="decorative-heading">Welcome!</div>
+                We are a small bakery that specializes in cinnamon rolls, from our famous original cinnamon rolls to 
+                a variety of artisan flavors. Our shop is located in Pittsburgh, PA and we ship fresh rolls anywhere in 
+                the Pittsburgh area. 
+                <br/>
+                <div class="emphasis">
+                    For bulk orders, call us at <a href="tel:123.456.789">123.456.789</a> or <a href="mailto:bunbun@gmail.com">e-mail us</a>.
+                </div>
+            </div>
+
+            <!-- Product list -->
+            <h1>Browse Buns</h1>
+            <div id="product-display-grid">
+                <div class="product" ng-repeat="bun in home.bunList">
+                    <div class="product-img-container">
+                        <img ng-src="{{::bun.imgUrl}}"/>
+                    </div>
+                    <div class="product-details">
+                        <div class="row-1">
+                            <div class="col-1 pull-left">
+                                <span class="product-name">{{bun.name}}</span><br/>
+                                <span class="product-price">{{'$' + bun.price }}</span>             
+                            </div>
+                            <div class="col-2 pull-right">
+                                <!-- Add to cart button goes here -->
+                                <img id="add-to-cart-btn" 
+                                    class="pull-right" 
+                                    src="assets/add-to-cart-green.png"
+                                    ng-click="home.openModal($index)"/>
+                            </div>
+                        </div>
+                        <div class="view-details-row pull-left">
+                            <a ng-href="product-view.html?id={{$index}}">View Details
+                                <img src="assets/noun_Next_1480292.png"/>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Modal popup for ordering -->
+                    <div id="{{'modal-' + $index}}" class="modal">
+                        <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <!--Customize Order Box-->
+                            <div class="customize-order-col">
+                                <div class="header">Customize Order</div>
+                                What glaze would you like to have for your {{bun.name}} cinnamon roll?
+                                <br/>
+                                <div style="margin: 0 auto; text-align:center;">
+                                    <div class="radio-list-item" ng-repeat="glaze in home.glazeList">
+                                        <input type="radio"
+                                            ng-value="$index"
+                                            id="{{'glaze-' + $index}}"
+                                            ng-model="home.selectedGlazeIndex"/>
+                                            <label for="{{'glaze-' + $index}}">&nbsp;{{::glaze.name}}&nbsp;&nbsp;
+                                                <br/>
+                                                <i class="price">+ ${{::glaze.price}}</i>
+                                            </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Add to cart and Quantity selection column-->
+                            <div class="add-to-cart-col">
+                                Select the number of rolls you'd like:
+                                <br />
+                                <div style="margin: 0 auto; text-align:center;">
+                                    <div class="radio-list-item" ng-repeat="qty in home.qtyList">
+                                        <input type="radio"
+                                            ng-value="$index"
+                                            id="{{'qty-' + $index}}"
+                                            ng-model="home.selectedQtyIndex"/>
+                                            <label for="{{'qty-' + $index}}">
+                                                &nbsp;{{::qty}}
+                                            </label>
+                                    </div>
+                                </div>
+                                <div class="price-display">
+                                    Total: <span class="price">${{home.selectedPrice.toFixed(2)}}</span>
+                                </div>
+                                <div id="add-to-cart-btn" ng-click="home.addItem($index)">Add to Cart</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div id="footer">
+            <span>&copy; Bun Bun Bake Shop, 2018</span>
+        </div>
+    </div>
+</body>
+</html>

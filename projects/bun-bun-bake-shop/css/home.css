@@ -1,0 +1,127 @@
+/* This file contains all styles related to index.html */
+
+/* Carousel Styles */
+
+#landing-carousel {
+    width: 100%;
+    max-height: 500px;
+    overflow: hidden;
+    margin-top: 48px;
+}
+
+#landing-carousel img {
+    width: 100%;
+    height: auto;
+}
+
+#landing-description {
+    padding: 16px;
+    text-align: justify;
+}
+
+/* Product Browsing Grid Styles */
+
+#product-display-grid {
+    text-align: center;
+    overflow: hidden;
+}
+
+.product {
+    width: 240px;
+    display: inline-block;
+    margin: 4px;
+    border: 1px #70707022 solid;
+}
+
+.product > div.product-img-container {
+    height: 200px;
+    width: 100%;
+    overflow: hidden;
+}
+
+div.product-img-container > img {
+    height: 100%;
+    width: auto;
+}
+
+div.product-details {
+    text-align: left;
+    margin: 8px;
+    font-weight: 700;
+    font-size: 12pt;
+}
+
+div.product-details span.product-price {
+    font-weight: 300; 
+}
+
+div.col-1 {
+    width: 70%;
+    min-width: 140px;
+    padding: 0 0 8px 0;
+}
+
+div.view-details-row > a{
+    font-weight: 400;
+    color: #285099;
+    text-decoration: none;
+}
+
+div.view-details-row img {
+    height: 8px;
+    width: auto;
+}
+
+img#add-to-cart-btn {
+    height: 36px;
+    width: auto;
+    padding: 4px 0;
+}
+
+img#add-to-cart-btn:hover {
+    cursor: pointer;
+}
+
+ /* The Modal (background) */
+ /* From W3 Schools */
+ .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    text-align: left;
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 40%; /* Could be more or less, depending on screen size */
+    overflow: hidden;
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    line-height: 1px;
+    margin-right: -8px;
+    margin-left: 8px;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+} 

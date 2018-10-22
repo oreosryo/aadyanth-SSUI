@@ -1,0 +1,20 @@
+<div ng-controller="MenuCtrl as menu" style="position:absolute;top:0;left:0;width:100%;z-index:100">
+    <!--Menu bar-->
+    <div id="main-menu">
+        <!--Brand-->
+        <div id="brand" onclick="window.location.href = 'index.html'">
+            <img src="assets/noun_bunny_967215 copy.png"/>
+            <span class="title">Bun Bun Bake Shop</span>
+        </div>
+        <div id="menu-list">
+            <div class="menu-item"><span onclick="window.location.href = 'index.html'">Home</span></div>
+            <div class="menu-item"><span>About</span></div>
+            <div class="menu-item"><span>Contact</span></div>
+            <div class="menu-item" id="shopping-cart">
+                <div ng-if="menu.cartCount != 0"id="shopping-cart-counter">{{menu.cartCount}}</div>
+                <img src="assets/noun_cart_1020918 copy.png" />
+            </div>
+            <div class="menu-item"><img src="assets/noun_account_644483 copy.png" /></div>
+        </div>
+    </div>
+</div>
